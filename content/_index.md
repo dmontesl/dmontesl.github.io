@@ -221,9 +221,9 @@ sections:
           icon_pack: fab
           name: DM Me
           link: 'https://twitter.com/DanielMontesL'
-        - icon: Linkedin
-          icon_pack: fas
-          name: Linkedin
+        - icon: linkedin
+          icon_pack: fab
+          name: linkedIn
           link: 'https://www.linkedin.com/in/dmontesl/'
       # Automatically link email and phone or display as text?
       autolink: true
