@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://dmontesl.github.io/sitemap.xml
