@@ -223,7 +223,7 @@ sections:
           link: 'https://twitter.com/DanielMontesL'
         - icon: linkedin
           icon_pack: fab
-          name: linkedIn
+          name: LinkedIn
           link: 'https://www.linkedin.com/in/dmontesl/'
       # Automatically link email and phone or display as text?
       autolink: true
