@@ -57,7 +57,7 @@ sections:
         - title: Pre-Doctoral Researcher
           company: University of Valladolid
           company_url: 'https://www.uva.es/'
-          company_logo: org-x
+          company_logo: uva
           location: Valladolid
           date_start: '2020-10-06'
           date_end: '2024-10-06'
