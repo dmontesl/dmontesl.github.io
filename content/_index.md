@@ -15,17 +15,41 @@ sections:
     content:
       title: Skills
       items:
-        - name: R
-          description: 90%
-          icon: r-project
+        - name: Python
+          description: 100%
+          icon: python
           icon_pack: fab
         - name: Statistics
           description: 100%
           icon: chart-line
           icon_pack: fas
-        - name: Photography
-          description: 10%
-          icon: camera-retro
+        - name: Git
+          description: 100%
+          icon: git
+          icon_pack: fab
+        - name: EcosimPro
+          description: 100%
+          icon: code
+          icon_pack: fas
+        - name: Matlab
+          description: 100%
+          icon: code
+          icon_pack: fas
+        - name: Julia
+          description: 100%
+          icon: code
+          icon_pack: fas
+        - name: C++
+          description: 100%
+          icon: code
+          icon_pack: fas
+        - name: GAMS
+          description: 100%
+          icon: code
+          icon_pack: fas
+        - name: Simulink
+          description: 100%
+          icon: code
           icon_pack: fas
   - block: experience
     content:
