@@ -33,20 +33,20 @@ sections:
           icon_pack: fas
         - name: Matlab
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: matlab
+          icon_pack: custom
         - name: Julia
           description: 100%
           icon: code
           icon_pack: fas
         - name: C++
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: cpp
+          icon_pack: custom
         - name: GAMS
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: gams
+          icon_pack: custom
         - name: Simulink
           description: 100%
           icon: code
