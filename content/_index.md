@@ -42,7 +42,7 @@ sections:
         - title: HVAC Trainee Engineer
           company: AVL List GmbH
           company_url: 'https://www.avl.com/en'
-          company_logo: org-gc
+          company_logo: avl
           location: Valladolid
           date_start: '2019-10-01'
           date_end: '2020-09-14'
