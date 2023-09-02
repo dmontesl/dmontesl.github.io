@@ -49,8 +49,8 @@ sections:
           icon_pack: custom
         - name: Simulink
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: simulink
+          icon_pack: custom
   - block: experience
     content:
       title: Experience
