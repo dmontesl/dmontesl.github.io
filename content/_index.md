@@ -18,7 +18,7 @@ sections:
         - name: Python
           description: 100%
           icon: python
-          icon_pack: fab
+          icon_pack: custom
         - name: Statistics
           description: 100%
           icon: chart-line
