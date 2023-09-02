@@ -29,16 +29,16 @@ sections:
           icon_pack: fab
         - name: EcosimPro
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: ecosimpro
+          icon_pack: custom
         - name: Matlab
           description: 100%
           icon: matlab
           icon_pack: custom
         - name: Julia
           description: 100%
-          icon: code
-          icon_pack: fas
+          icon: julia
+          icon_pack: custom
         - name: C++
           description: 100%
           icon: cpp
