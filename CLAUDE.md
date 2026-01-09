@@ -12,6 +12,8 @@ Personal academic website built with Astro, featuring blog posts, projects, publ
 npm run dev      # Start development server (http://localhost:4321)
 npm run build    # Build for production (outputs to ./dist)
 npm run preview  # Preview production build locally
+npm run lint     # Check for linting issues
+npm run lint:fix # Auto-fix linting issues
 ```
 
 ## Tech Stack
@@ -23,6 +25,7 @@ npm run preview  # Preview production build locally
 - **Images**: Astro Image component with `image()` schema helper
 - **Math**: KaTeX (remark-math + rehype-katex)
 - **Code Highlighting**: Shiki (built-in)
+- **Linting**: ESLint with Astro, React, and TypeScript plugins
 - **Deployment**: GitHub Pages via GitHub Actions
 
 ## Architecture

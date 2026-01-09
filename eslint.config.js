@@ -1,20 +1,19 @@
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintPluginAstro from 'eslint-plugin-astro';
-import eslintPluginReact from 'eslint-plugin-react';
-import globals from 'globals';
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import eslintPluginAstro from "eslint-plugin-astro";
+import eslintPluginReact from "eslint-plugin-react";
+import eslintPluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
 export default [
   // Global ignores
   {
     ignores: [
-      'node_modules/',
-      '.astro/',
-      'dist/',
-      '.cache/',
-      'public/',
-      '*.config.js',
-      '*.config.mjs',
+      "node_modules/",
+      ".astro/",
+      "dist/",
+      ".cache/",
+      "public/",
     ],
   },
 
@@ -31,7 +30,7 @@ export default [
   {
     languageOptions: {
       ecmaVersion: 2022,
-      sourceType: 'module',
+      sourceType: "module",
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -41,9 +40,10 @@ export default [
 
   // React/TSX files
   {
-    files: ['**/*.tsx', '**/*.jsx'],
+    files: ["**/*.tsx", "**/*.jsx"],
     plugins: {
       react: eslintPluginReact,
+      "react-hooks": eslintPluginReactHooks,
     },
     languageOptions: {
       parserOptions: {
@@ -54,31 +54,24 @@ export default [
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
     rules: {
-      'react/react-in-jsx-scope': 'off', // Not needed with React 17+ JSX transform
-      'react/prop-types': 'off', // Using TypeScript for prop validation
+      ...eslintPluginReactHooks.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
     },
   },
 
-  // TypeScript files - relax some rules
+  // TypeScript files
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     rules: {
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
-    },
-  },
-
-  // Astro files
-  {
-    files: ['**/*.astro'],
-    rules: {
-      // Add any Astro-specific rule overrides here
     },
   },
 ];

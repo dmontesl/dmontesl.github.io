@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 export const siteConfig = {
   author: "Daniel Montes",
   title: "Daniel Montes | Personal Website",
-  description: "Personal website of Daniel Montes - Software Engineer & Researcher",
+  description: "Personal website of Daniel Montes - Senior Data Scientist & Researcher",
   url: "https://dmontesl.github.io",
   social: [
     {
@@ -18,7 +18,7 @@ export const siteConfig = {
     },
     {
       name: "Email",
-      href: "mailto:contact@example.com",
+      href: "mailto:dmontesl1203@gmail.com",
       icon: Mail,
     },
   ],
