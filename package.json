@@ -7,8 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint": "eslint . --ext .js,.ts,.tsx,.jsx,.astro,.md,.mdx",
-    "lint:fix": "eslint . --ext .js,.ts,.tsx,.jsx,.astro,.md,.mdx --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.13",
