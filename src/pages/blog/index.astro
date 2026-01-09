@@ -1,0 +1,85 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { siteConfig } from "@/data/site";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
+---
+
+<BaseLayout
+  title={`Blog | ${siteConfig.author}`}
+  description="Articles about software development, research, and technology"
+>
+  <div class="container mx-auto max-w-5xl px-4 py-16">
+    <header class="mb-12">
+      <h1 class="text-3xl font-bold md:text-4xl">Blog</h1>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Thoughts on software, research, and technology
+      </p>
+
+      {allTags.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-2">
+          {allTags.map((tag) => (
+            <Badge variant="outline" className="cursor-default">
+              {tag}
+            </Badge>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {posts.length === 0 ? (
+      <p class="text-muted-foreground">No posts yet. Check back soon!</p>
+    ) : (
+      <div class="space-y-6">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="group block">
+            <Card className="transition-colors hover:border-primary/50">
+              <CardHeader>
+                <div class="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  {post.data.updatedDate && (
+                    <span>
+                      (Updated:{" "}
+                      {post.data.updatedDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                      )
+                    </span>
+                  )}
+                </div>
+                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+                  {post.data.title}
+                </CardTitle>
+                <CardDescription className="text-base">
+                  {post.data.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map((tag) => (
+                    <Badge variant="secondary">{tag}</Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>

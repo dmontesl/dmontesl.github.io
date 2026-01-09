@@ -1,0 +1,54 @@
+---
+title: "Machine Learning Pipeline"
+description: "An end-to-end ML pipeline for data processing, model training, and deployment with automated monitoring."
+tags: ["Python", "TensorFlow", "Docker", "MLOps"]
+github: "https://github.com/dmontesl/ml-pipeline"
+featured: true
+order: 1
+---
+
+This project implements a production-ready machine learning pipeline that handles everything from data ingestion to model deployment.
+
+## Architecture
+
+The pipeline consists of several key components:
+
+1. **Data Ingestion**: Automated data collection from multiple sources
+2. **Feature Engineering**: Transformation and feature extraction
+3. **Model Training**: Distributed training with hyperparameter optimization
+4. **Model Serving**: REST API for real-time predictions
+5. **Monitoring**: Performance tracking and drift detection
+
+## Technical Details
+
+The core training loop uses a custom loss function:
+
+$$
+\mathcal{L} = \frac{1}{N}\sum_{i=1}^{N}(y_i - \hat{y}_i)^2 + \lambda\|\theta\|_2^2
+$$
+
+Where $\lambda$ is the regularization parameter and $\theta$ represents model weights.
+
+## Sample Code
+
+```python
+from pipeline import DataProcessor, ModelTrainer
+
+# Initialize components
+processor = DataProcessor(config)
+trainer = ModelTrainer(model_config)
+
+# Run pipeline
+data = processor.load_and_transform("data/raw")
+model = trainer.train(data, epochs=100)
+
+# Deploy
+model.deploy(endpoint="production")
+```
+
+## Results
+
+The pipeline achieved:
+- 40% reduction in training time
+- 99.9% uptime for model serving
+- Automated retraining on data drift

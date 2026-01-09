@@ -1,0 +1,91 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import { siteConfig } from "@/data/site";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: project,
+  }));
+}
+
+const project = Astro.props;
+const { Content } = await render(project);
+---
+
+<BaseLayout
+  title={`${project.data.title} | ${siteConfig.author}`}
+  description={project.data.description}
+>
+  <article class="container mx-auto max-w-3xl px-4 py-16">
+    <div class="mb-8">
+      <Button variant="ghost" size="sm" asChild>
+        <a href="/projects" class="inline-flex items-center gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          Back to Projects
+        </a>
+      </Button>
+    </div>
+
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold md:text-4xl">{project.data.title}</h1>
+      <p class="mt-4 text-lg text-muted-foreground">
+        {project.data.description}
+      </p>
+
+      <div class="mt-4 flex flex-wrap gap-2">
+        {project.data.tags.map((tag) => (
+          <Badge variant="secondary">{tag}</Badge>
+        ))}
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-4">
+        {project.data.github && (
+          <Button variant="outline" asChild>
+            <a
+              href={project.data.github}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Github className="mr-2 h-4 w-4" />
+              View Code
+            </a>
+          </Button>
+        )}
+        {project.data.live && (
+          <Button asChild>
+            <a
+              href={project.data.live}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ExternalLink className="mr-2 h-4 w-4" />
+              Live Demo
+            </a>
+          </Button>
+        )}
+      </div>
+    </header>
+
+    {project.data.image && (
+      <Image
+        src={project.data.image}
+        alt={project.data.imageAlt || project.data.title}
+        width={1200}
+        height={630}
+        class="mb-8 w-full rounded-lg object-cover"
+        loading="eager"
+      />
+    )}
+
+    <div class="prose prose-invert max-w-none">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,123 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { FileText, ExternalLink } from "lucide-react";
+import { siteConfig } from "@/data/site";
+
+const publications = (await getCollection("publications")).sort(
+  (a, b) => b.data.year - a.data.year
+);
+
+const typeLabels: Record<string, string> = {
+  journal: "Journal Article",
+  conference: "Conference Paper",
+  preprint: "Preprint",
+  thesis: "Thesis",
+};
+
+const groupedByYear = publications.reduce(
+  (acc, pub) => {
+    const year = pub.data.year;
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(pub);
+    return acc;
+  },
+  {} as Record<number, typeof publications>
+);
+
+const years = Object.keys(groupedByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+---
+
+<BaseLayout
+  title={`Publications | ${siteConfig.author}`}
+  description="Academic publications and research papers"
+>
+  <div class="container mx-auto max-w-5xl px-4 py-16">
+    <header class="mb-12">
+      <h1 class="text-3xl font-bold md:text-4xl">Publications</h1>
+      <p class="mt-4 text-lg text-muted-foreground">
+        Academic research and publications
+      </p>
+    </header>
+
+    {publications.length === 0 ? (
+      <p class="text-muted-foreground">No publications yet. Check back soon!</p>
+    ) : (
+      <div class="space-y-12">
+        {years.map((year) => (
+          <section>
+            <h2 class="mb-6 text-2xl font-bold text-primary">{year}</h2>
+            <div class="space-y-4">
+              {groupedByYear[year].map((pub) => (
+                <Card>
+                  <CardHeader>
+                    <div class="flex items-start justify-between gap-4">
+                      <div>
+                        <Badge variant="outline" className="mb-2">
+                          {typeLabels[pub.data.type]}
+                        </Badge>
+                        <CardTitle class="text-lg leading-snug">
+                          {pub.data.title}
+                        </CardTitle>
+                      </div>
+                    </div>
+                    <CardDescription>
+                      <span class="block">
+                        {pub.data.authors.join(", ")}
+                      </span>
+                      <span class="block mt-1 italic">
+                        {pub.data.venue}
+                      </span>
+                    </CardDescription>
+                  </CardHeader>
+                  {(pub.data.abstract || pub.data.doi || pub.data.pdf) && (
+                    <CardContent>
+                      {pub.data.abstract && (
+                        <p class="text-sm text-muted-foreground mb-4 line-clamp-3">
+                          {pub.data.abstract}
+                        </p>
+                      )}
+                      <div class="flex flex-wrap gap-2">
+                        {pub.data.doi && (
+                          <Button variant="outline" size="sm" asChild>
+                            <a
+                              href={`https://doi.org/${pub.data.doi}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <ExternalLink className="mr-2 h-4 w-4" />
+                              DOI
+                            </a>
+                          </Button>
+                        )}
+                        {pub.data.pdf && (
+                          <Button variant="outline" size="sm" asChild>
+                            <a
+                              href={pub.data.pdf}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              <FileText className="mr-2 h-4 w-4" />
+                              PDF
+                            </a>
+                          </Button>
+                        )}
+                      </div>
+                    </CardContent>
+                  )}
+                </Card>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
